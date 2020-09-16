@@ -17,13 +17,25 @@
                   <Image url="file:/C:/Users/kiter/eclipse-workspace/Manage_computerEnergy/src/images/Peace.jpg" />
                </image>
             </ImageView>
-            <Label id="dateTimeLabel" fx:id="dateTimeLabel" alignment="CENTER" layoutY="396.0" prefHeight="62.0" prefWidth="344.0" style="-fx-background-color: #ffd700;" text="Date and Time" textAlignment="CENTER">
+            <Label fx:id="dateTimeLabel" alignment="CENTER" layoutY="396.0" prefHeight="62.0" prefWidth="344.0" style="-fx-background-color: #ffd700;" text="Date and Time" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="344.0" prefHeight="458.0" prefWidth="500.0" style="-fx-background-color: #9acd32" />
+      <AnchorPane layoutX="344.0" prefHeight="458.0" prefWidth="500.0" style="-fx-background-color: #9acd32">
+         <children>
+            <Label fx:id="batteryLabel" alignment="BOTTOM_CENTER" layoutX="250.0" layoutY="422.0" prefHeight="36.0" prefWidth="250.0" text="System Battery">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="powerLabel" alignment="BOTTOM_CENTER" layoutY="422.0" prefHeight="36.0" prefWidth="250.0" text="Power">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
    </children>
 </AnchorPane>
