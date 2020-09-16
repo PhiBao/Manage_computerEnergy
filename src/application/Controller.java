@@ -22,7 +22,7 @@ public class Controller implements Initializable {
 
 	private void setDateAndTime() {
 		Thread timerThread = new Thread(() -> {
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE | dd/MM/yyyy HH:mm:ss");
 
 			while (true) {
 				try {
