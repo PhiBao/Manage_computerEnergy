@@ -41,6 +41,7 @@ public class PowerSource {
 				new NativeLong(0), batteryState, new NativeLong(batteryState.size()))
 				|| batteryState.batteryPresent == 0) {
 			psArray[0] = new PowerSource("Unknown", 0d, -1d);
+			
 		} else {
 			int estimatedTime = -2; // -1 = unknown, -2 = unlimited
 			if (batteryState.acOnLine == 0 && batteryState.charging == 0 && batteryState.discharging > 0) {

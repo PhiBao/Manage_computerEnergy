@@ -38,8 +38,9 @@ public class Controller implements Initializable {
 					
 					if (PowerSource.getPowerSources().length == 0) {
 						sb.append("Unknown");
-					} else {
+					} else {						
 						double timeRemaining = PowerSource.getPowerSources()[0].getTimeRemaining();
+						
 						if (timeRemaining < -1d)
 							sb.append("Charging");
 						else if (timeRemaining < 0d)
@@ -60,9 +61,7 @@ public class Controller implements Initializable {
 						public void run() {
 							powerLabel.setText(tmp[0].trim());
 							batteryLabel.setText(tmp[1].trim());
-
 						}
-
 					});
 
 					try {
@@ -70,7 +69,6 @@ public class Controller implements Initializable {
 
 					} catch (InterruptedException e) {
 						e.printStackTrace();
-
 					}
 				}
 			}
@@ -91,15 +89,11 @@ public class Controller implements Initializable {
 						public void run() {
 							dateTimeLabel.setText(time);
 						}
-
 					});
-
 					try {
 						Thread.sleep(1000); // 1 second
-
 					} catch (InterruptedException e) {
 						e.printStackTrace();
-
 					}
 				}
 			}
