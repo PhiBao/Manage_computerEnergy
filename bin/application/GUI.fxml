@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -19,8 +22,15 @@
             </ImageView>
             <Label fx:id="dateTimeLabel" alignment="CENTER" layoutY="396.0" prefHeight="62.0" prefWidth="344.0" style="-fx-background-color: #ffd700;" text="Date and Time" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="Roboto Bold" size="20.0" />
                </font>
+               <effect>
+                  <InnerShadow color="#a89e1a" height="27.22" radius="12.3325" width="24.11">
+                     <input>
+                        <SepiaTone />
+                     </input>
+                  </InnerShadow>
+               </effect>
             </Label>
          </children>
       </AnchorPane>
@@ -28,14 +38,35 @@
          <children>
             <Label fx:id="batteryLabel" alignment="BOTTOM_CENTER" layoutX="250.0" layoutY="422.0" prefHeight="36.0" prefWidth="250.0" text="System Battery">
                <font>
-                  <Font name="System Bold Italic" size="15.0" />
+                  <Font name="Arial Bold Italic" size="16.0" />
                </font>
             </Label>
             <Label fx:id="powerLabel" alignment="BOTTOM_CENTER" layoutY="422.0" prefHeight="36.0" prefWidth="250.0" text="Power">
                <font>
-                  <Font name="System Bold Italic" size="15.0" />
+                  <Font name="Arial Bold Italic" size="16.0" />
                </font>
             </Label>
-         </children></AnchorPane>
+            <HBox layoutY="28.0" prefHeight="72.0" prefWidth="500.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="54.0" prefWidth="146.0" text="Brightness:">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Slider prefHeight="61.0" prefWidth="339.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Slider>
+               </children>
+            </HBox>
+         </children>
+         <effect>
+            <InnerShadow choke="0.2" color="#63e486" height="48.99" radius="23.2175" width="45.88">
+               <input>
+                  <SepiaTone level="0.2" />
+               </input>
+            </InnerShadow>
+         </effect></AnchorPane>
    </children>
 </AnchorPane>

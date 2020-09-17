@@ -46,7 +46,7 @@ public class Controller implements Initializable {
 						else if (timeRemaining < 0d)
 							sb.append("Calculating time remaining");
 						else
-							sb.append(String.format("%d:%02d remaining", (int) (timeRemaining / 3600),
+							sb.append(String.format("%d:%02d' remaining", (int) (timeRemaining / 3600),
 									(int) (timeRemaining / 60) % 60));
 					}
 					
