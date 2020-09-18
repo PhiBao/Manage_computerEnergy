@@ -53,7 +53,7 @@
                         <Font name="Arial Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Slider prefHeight="61.0" prefWidth="339.0">
+                  <Slider fx:id="sliderBrightness" prefHeight="61.0" prefWidth="339.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
