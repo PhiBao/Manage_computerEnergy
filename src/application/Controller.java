@@ -34,8 +34,20 @@ public class Controller implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		setDateAndTime();
 		setBatterySystem();
+
 		sliderBrightness.setValue(60);
-		setBrightness();
+		sliderBrightness.valueProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+				try {
+					BrightnessManager.setBrightness(Math.round(newValue.intValue()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
 
 	}
 
@@ -108,21 +120,6 @@ public class Controller implements Initializable {
 				}
 			}
 		}).start();
-	}
-
-	private void setBrightness() {
-		sliderBrightness.valueProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-				try {
-					BrightnessManager.setBrightness(Math.round(newValue.intValue()));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		});
 	}
 
 }
