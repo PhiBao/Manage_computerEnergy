@@ -3,8 +3,13 @@ package application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
@@ -29,11 +34,20 @@ public class Controller implements Initializable {
 
 	@FXML
 	private Slider sliderBrightness;
+	
+	@FXML
+	private ComboBox<String> optionShutdown;
+	
+	@FXML
+	private Button performButton;
+	
+	static String commandLine = "";
+	ObservableList<String> list = FXCollections.observableArrayList("Hibernate", "Shutdown", "Restart");
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		setDateAndTime();
-		setBatterySystem();
+		optionShutdown.setItems(list);
+		performButton.setDisable(true);
 
 		sliderBrightness.setValue(60);
 		sliderBrightness.valueProperty().addListener(new ChangeListener<Number>() {
@@ -48,8 +62,21 @@ public class Controller implements Initializable {
 
 			}
 		});
-
+		
+		setDateAndTime();
+		setBatterySystem();
 	}
+	
+	public void optionChanged (ActionEvent event){
+        if (optionShutdown.getValue() == "Shutdown") commandLine = "shutdown -s";
+        if (optionShutdown.getValue() == "Hibernate") commandLine = "shutdown -h";
+        if (optionShutdown.getValue() == "Restart") commandLine = "shutdown -r";
+        performButton.setDisable(false);
+    }
+	
+	public void performShutdown (ActionEvent event){
+		
+    }
 
 	private void setBatterySystem() {
 		new Thread(new Runnable() {
