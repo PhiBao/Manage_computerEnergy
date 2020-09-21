@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,13 +35,19 @@ public class Controller implements Initializable {
 
 	@FXML
 	private Slider sliderBrightness;
-	
+
 	@FXML
 	private ComboBox<String> optionShutdown;
-	
+
 	@FXML
 	private Button performButton;
+
+	@FXML
+	private TextField minutesText;
 	
+	@FXML
+	private TextField hoursText;
+
 	static String commandLine = "";
 	ObservableList<String> list = FXCollections.observableArrayList("Hibernate", "Shutdown", "Restart");
 
@@ -48,6 +55,8 @@ public class Controller implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		optionShutdown.setItems(list);
 		performButton.setDisable(true);
+		hoursText.setText("0");
+		minutesText.setText("0");
 
 		sliderBrightness.setValue(60);
 		sliderBrightness.valueProperty().addListener(new ChangeListener<Number>() {
@@ -62,21 +71,59 @@ public class Controller implements Initializable {
 
 			}
 		});
-		
+
 		setDateAndTime();
 		setBatterySystem();
 	}
-	
-	public void optionChanged (ActionEvent event){
-        if (optionShutdown.getValue() == "Shutdown") commandLine = "shutdown -s";
-        if (optionShutdown.getValue() == "Hibernate") commandLine = "shutdown -h";
-        if (optionShutdown.getValue() == "Restart") commandLine = "shutdown -r";
-        performButton.setDisable(false);
-    }
-	
-	public void performShutdown (ActionEvent event){
-		
-    }
+
+	public void optionChanged(ActionEvent event) {
+		if (optionShutdown.getValue() == "Shutdown")
+			commandLine = "shutdown -s";
+		if (optionShutdown.getValue() == "Hibernate")
+			commandLine = "shutdown -h";
+		if (optionShutdown.getValue() == "Restart")
+			commandLine = "shutdown -r";
+		performButton.setDisable(false);
+	}
+
+	public void performShutdown(ActionEvent event) throws NumberFormatException, InterruptedException, IOException {
+		//shutdownThread();
+		String hours = hoursText.getText();
+		String minutes = minutesText.getText();
+		Thread.sleep(Integer.parseInt(hours) * 60 * 60 * 1000 + Integer.parseInt(minutes) * 60 * 1000);
+		Runtime.getRuntime().exec(commandLine);
+	}
+
+	/*
+	private void shutdownThread() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String hours = hoursText.getText();
+				String minutes = minutesText.getText();
+				
+				try {
+					Thread.sleep(Integer.parseInt(hours) * 60 * 60 * 1000 + Integer.parseInt(minutes) * 60 * 1000);
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				try {
+					@SuppressWarnings("unused")
+					Process shutdownProcess = Runtime.getRuntime().exec(commandLine);
+					System.exit(0);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+	*/
 
 	private void setBatterySystem() {
 		new Thread(new Runnable() {
