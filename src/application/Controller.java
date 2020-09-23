@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -44,7 +45,7 @@ public class Controller implements Initializable {
 
 	@FXML
 	private TextField minutesText;
-	
+
 	@FXML
 	private TextField hoursText;
 
@@ -87,21 +88,35 @@ public class Controller implements Initializable {
 	}
 
 	public void performShutdown(ActionEvent event) throws NumberFormatException, InterruptedException, IOException {
-		//shutdownThread();
-		String hours = hoursText.getText();
-		String minutes = minutesText.getText();
-		Thread.sleep(Integer.parseInt(hours) * 60 * 60 * 1000 + Integer.parseInt(minutes) * 60 * 1000);
-		Runtime.getRuntime().exec(commandLine);
+		shutdownThread();
+		/*
+		 * String hours = hoursText.getText(); String minutes = minutesText.getText();
+		 * Thread.sleep(Integer.parseInt(hours) * 60 * 60 * 1000 +
+		 * Integer.parseInt(minutes) * 60 * 1000);
+		 * Runtime.getRuntime().exec(commandLine);
+		 */
 	}
 
-	/*
 	private void shutdownThread() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				String hours = hoursText.getText();
 				String minutes = minutesText.getText();
-				
+
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						String message = "Your command will be executed after " + hours + " hours " + minutes
+								+ " minutes!";
+						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+						alert.setTitle("Information");
+						alert.setHeaderText("Notification");
+						alert.setContentText(message);
+						alert.show();
+					}
+				});
+
 				try {
 					Thread.sleep(Integer.parseInt(hours) * 60 * 60 * 1000 + Integer.parseInt(minutes) * 60 * 1000);
 				} catch (NumberFormatException e) {
@@ -111,7 +126,7 @@ public class Controller implements Initializable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				try {
 					@SuppressWarnings("unused")
 					Process shutdownProcess = Runtime.getRuntime().exec(commandLine);
@@ -123,7 +138,6 @@ public class Controller implements Initializable {
 			}
 		}).start();
 	}
-	*/
 
 	private void setBatterySystem() {
 		new Thread(new Runnable() {
